@@ -14,7 +14,7 @@ import java.util.List;
  * @author accusedmonk
  */
 
-public class Player implements Serializable{
+public class Player implements Serializable {
     
     private String playerName;
     private PlayerClass playerClass;

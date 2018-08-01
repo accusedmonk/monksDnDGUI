@@ -5,11 +5,13 @@
  */
 package com.simplyapps.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author accusedmonk
  */
-public class Skill {
+public class Skill implements Serializable {
     
     private boolean skillActive;
     private int skillProficiency;

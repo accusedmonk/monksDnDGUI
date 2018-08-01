@@ -5,13 +5,14 @@
  */
 package com.simplyapps.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author accusedmonk
  */
-public class PlayerSkills {
+public class PlayerSkills implements Serializable {
     
     List<Skill> skills;
     

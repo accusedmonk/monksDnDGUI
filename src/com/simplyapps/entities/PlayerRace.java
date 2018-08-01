@@ -5,10 +5,12 @@
  */
 package com.simplyapps.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author accusedmonk
  */
-public class PlayerRace {
+public class PlayerRace implements Serializable {
     
 }
