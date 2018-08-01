@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class PlayerSkills implements Serializable {
     
-    List<Skill> skills;
+    public List<Skill> skills;
     
     public PlayerSkills(){
         

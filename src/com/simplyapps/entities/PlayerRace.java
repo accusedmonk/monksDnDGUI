@@ -13,4 +13,8 @@ import java.io.Serializable;
  */
 public class PlayerRace implements Serializable {
     
+    public PlayerRace(){
+        
+        
+    }
 }

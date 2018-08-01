@@ -6,6 +6,7 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,15 +17,32 @@ import java.util.List;
 
 public class Player implements Serializable {
     
-    private String playerName;
-    private PlayerClass playerClass;
-    private PlayerBackground playerBackground;
-    private PlayerRace playerRace;
-    private PlayerStats playerStats;
+    public String playerName;
+    public PlayerClass playerClass;
+    public PlayerBackground playerBackground;
+    public PlayerRace playerRace;
+    public PlayerStats playerStats;
     
-    private List<String> personalityTraits;
-    private List<String> ideals;
-    private List<String> bonds;
-    private List<String> flaws;
-    private List<String> languages;
+    List<String> personalityTraits;
+    List<String> ideals;
+    List<String> bonds;
+    List<String> flaws;
+    List<String> languages;
+    
+    public Player(){
+        initializePlayer();
+    }
+    
+    public void initializePlayer(){
+        
+        playerClass = new PlayerClass();
+        playerBackground = new PlayerBackground();
+        playerRace = new PlayerRace();
+        playerStats = new PlayerStats();
+        personalityTraits = new ArrayList<String>();
+        ideals = new ArrayList<String>();
+        bonds = new ArrayList<String>();
+        flaws = new ArrayList<String>();
+        languages = new ArrayList<String>();
+    }
 }

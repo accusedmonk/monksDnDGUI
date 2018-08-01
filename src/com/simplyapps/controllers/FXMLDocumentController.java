@@ -5,13 +5,18 @@
  */
 package com.simplyapps.controllers;
 
+import com.simplyapps.entities.Player;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -21,6 +26,10 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
+    @FXML
+    private TextField intelligenceModTextField;
+    @FXML
+    private Spinner<Integer> intelligenceSpinner;
     
     @FXML
     private void exitOnButton(ActionEvent event) {
@@ -30,7 +39,15 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Player p = new Player();
+        
+        intelligenceSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
+        
+        intelligenceSpinner.valueProperty().addListener((ObservableValue<? extends Integer> observable, //
+                Integer oldValue, Integer newValue) -> {
+            p.playerStats.setIntelligence(newValue);
+            intelligenceModTextField.setText(String.valueOf(p.playerStats.getIntelligenceMod()));
+        });
     }    
     
 }

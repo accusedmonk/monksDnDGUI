@@ -13,4 +13,7 @@ import java.io.Serializable;
  */
 public class PlayerBackground implements Serializable {
     
+    public PlayerBackground(){
+        
+    }
 }
