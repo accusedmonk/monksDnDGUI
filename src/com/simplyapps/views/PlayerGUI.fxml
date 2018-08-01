@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.simplyapps.controllers.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simplyapps.controllers.FXMLDocumentController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#727272" height="1000.0" stroke="#4d4d4d" strokeType="INSIDE" strokeWidth="3.0" width="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <MenuBar AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
@@ -73,16 +74,109 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Strength" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
+                                 <children>
+                                    <TextField fx:id="strengthModTextField" />
+                                    <Spinner fx:id="strengthSpinner" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="2.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Dexterity" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
+                                 <children>
+                                    <TextField fx:id="dexterityModTextField" />
+                                    <Spinner fx:id="dexteritySpinner" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="2.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Constitution" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
+                                 <children>
+                                    <TextField fx:id="constitutionModTextField" />
+                                    <Spinner fx:id="constitutionSpinner" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="2.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Intelligence" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                  <children>
                                     <TextField fx:id="intelligenceModTextField" />
                                     <Spinner fx:id="intelligenceSpinner" />
                                  </children>
+                                 <padding>
+                                    <Insets left="2.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Wisdom" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
+                                 <children>
+                                    <TextField fx:id="wisdomModTextField" />
+                                    <Spinner fx:id="wisdomSpinner" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="2.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Charisma" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
+                                 <children>
+                                    <TextField fx:id="charismaModTextField" />
+                                    <Spinner fx:id="charismaSpinner" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="2.0" />
+                                 </padding>
                               </HBox>
                            </children>
                         </VBox>
