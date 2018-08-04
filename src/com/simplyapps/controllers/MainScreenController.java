@@ -5,6 +5,7 @@
  */
 package com.simplyapps.controllers;
 
+import com.simplyapps.data.JSONHandler;
 import com.simplyapps.entities.Player;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,6 +49,8 @@ public class MainScreenController implements Initializable {
             p.playerStats.setIntelligence(newValue);
             intelligenceModTextField.setText(String.valueOf(p.playerStats.getIntelligenceMod()));
         });
+        
+        JSONHandler jh = new JSONHandler("C:\\NetBeans Apps\\DnDPlayerInterface\\src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json");
     }    
     
 }
