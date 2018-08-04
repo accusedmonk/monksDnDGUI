@@ -6,6 +6,7 @@
 package com.simplyapps.controllers;
 
 import com.simplyapps.data.JSONHandler;
+import com.simplyapps.data.UpdateTextBuilder;
 import com.simplyapps.entities.Player;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,10 +15,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  *
@@ -26,17 +31,18 @@ import javafx.scene.control.TextField;
 public class MainScreenController implements Initializable {
     
     @FXML
-    private Label label;
+    private TextFlow textUpdatesTextFlow;
     @FXML
-    private TextField intelligenceModTextField;
+    private TextField playerNameTextField, characterNameTextField, 
+                        strengthModTextField, dexterityModTextField, constitutionModTextField,
+                        intelligenceModTextField, wisdomModTextField, charismaModTextField;
     @FXML
-    private Spinner<Integer> intelligenceSpinner;
+    private Spinner<Integer> strengthSpinner, dexteritySpinner, constitutionSpinner, intelligenceSpinner, wisdomSpinner, charismaSpinner;
+    @FXML
+    private ChoiceBox classChoiceBox, raceChoiceBox, backgroundChoiceBox, alignmentChoiceBox;
+    @FXML
+    private ProgressBar hitPointsProgressBar, experienceProgressBar;
     
-    @FXML
-    private void exitOnButton(ActionEvent event) {
-        Platform.exit();
-        System.exit(0);
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +56,25 @@ public class MainScreenController implements Initializable {
             intelligenceModTextField.setText(String.valueOf(p.playerStats.getIntelligenceMod()));
         });
         
+        
+        for (int i = 0; i < 10; i++){
+            textUpdatesTextFlow.getChildren().add(UpdateTextBuilder.buildUpdateText("Testing update builder "+i));
+            textUpdatesTextFlow.getChildren().add(UpdateTextBuilder.buildAlertText("Testing alert builder "+i));
+        }
         JSONHandler jh = new JSONHandler("C:\\NetBeans Apps\\DnDPlayerInterface\\src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json");
     }    
+    
+    
+    @FXML
+    private void exitOnButton(ActionEvent event) {
+        Platform.exit();
+        System.exit(0);
+    }
+    
+    @FXML
+    private void saveCharacter(){
+        
+        
+    }
     
 }

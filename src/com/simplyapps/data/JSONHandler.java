@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +33,6 @@ public class JSONHandler {
         json = new File(filePath);
         
         map = gson.fromJson(readJsonFile(json), new TypeToken<Map<String, Object>>(){}.getType());
-        System.out.println("");
     }
     
     private String readJsonFile(File file){
@@ -42,6 +40,7 @@ public class JSONHandler {
         
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(file));
+            
             fileReader.lines().forEach(string -> jsonString.append(string));
             
         } catch (FileNotFoundException ex) {
