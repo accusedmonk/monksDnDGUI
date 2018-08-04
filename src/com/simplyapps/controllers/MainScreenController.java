@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
@@ -42,6 +43,8 @@ public class MainScreenController implements Initializable {
     private ChoiceBox classChoiceBox, raceChoiceBox, backgroundChoiceBox, alignmentChoiceBox;
     @FXML
     private ProgressBar hitPointsProgressBar, experienceProgressBar;
+    @FXML
+    private ScrollPane updatesScrollPane;
     
     
     @Override
@@ -54,14 +57,10 @@ public class MainScreenController implements Initializable {
                 Integer oldValue, Integer newValue) -> {
             p.playerStats.setIntelligence(newValue);
             intelligenceModTextField.setText(String.valueOf(p.playerStats.getIntelligenceMod()));
+            updatePlayer("Intelligence changed to : "+p.playerStats.getIntelligence());
         });
         
-        
-        for (int i = 0; i < 10; i++){
-            textUpdatesTextFlow.getChildren().add(UpdateTextBuilder.buildUpdateText("Testing update builder "+i));
-            textUpdatesTextFlow.getChildren().add(UpdateTextBuilder.buildAlertText("Testing alert builder "+i));
-        }
-        JSONHandler jh = new JSONHandler("C:\\NetBeans Apps\\DnDPlayerInterface\\src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json");
+        JSONHandler jh = new JSONHandler("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json");
     }    
     
     
@@ -75,6 +74,18 @@ public class MainScreenController implements Initializable {
     private void saveCharacter(){
         
         
+    }
+    
+    private void updatePlayer(String message){
+        
+        textUpdatesTextFlow.getChildren().add(UpdateTextBuilder.buildUpdateText(message));
+        updatesScrollPane.setVvalue(updatesScrollPane.getVmax());
+    }
+    
+    private void alertPlayer(String message){
+        
+        textUpdatesTextFlow.getChildren().add(UpdateTextBuilder.buildAlertText(message));
+        updatesScrollPane.setVvalue(updatesScrollPane.getVmax());
     }
     
 }
