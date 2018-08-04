@@ -17,9 +17,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simplyapps.controllers.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simplyapps.controllers.MainScreenController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#727272" height="1000.0" stroke="#4d4d4d" strokeType="INSIDE" strokeWidth="3.0" width="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" onAction="#exitOnButton" prefHeight="25.0" prefWidth="50.0" text="Exit" textAlignment="CENTER" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+              <Label fx:id="label" minHeight="16" minWidth="69" />
+         </children>
+      </AnchorPane>
       <MenuBar AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -39,12 +45,6 @@
           </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-              <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" onAction="#exitOnButton" prefHeight="25.0" prefWidth="50.0" text="Exit" textAlignment="CENTER" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
-              <Label fx:id="label" minHeight="16" minWidth="69" />
-         </children>
-      </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0">
          <children>
             <GridPane prefHeight="672.0" prefWidth="952.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
