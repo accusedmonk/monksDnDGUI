@@ -6,12 +6,16 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author accusedmonk
  */
 public class PlayerClass implements Serializable {
+    
+    List<Map<String, String>> features;
     
     public PlayerClass(){
         

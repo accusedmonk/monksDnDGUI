@@ -18,6 +18,7 @@ import java.util.List;
 public class Player implements Serializable {
     
     public String playerName;
+    public String characterName;
     public PlayerClass playerClass;
     public PlayerBackground playerBackground;
     public PlayerRace playerRace;
@@ -30,11 +31,14 @@ public class Player implements Serializable {
     List<String> languages;
     
     public Player(){
-        initializePlayer();
+        
+        initializeNewPlayer();
     }
     
-    public void initializePlayer(){
+    public void initializeNewPlayer(){
         
+        playerName = "";
+        characterName = "";
         playerClass = new PlayerClass();
         playerBackground = new PlayerBackground();
         playerRace = new PlayerRace();
@@ -44,5 +48,10 @@ public class Player implements Serializable {
         bonds = new ArrayList<String>();
         flaws = new ArrayList<String>();
         languages = new ArrayList<String>();
+    }
+    
+    public void loadExistingPlayer(){
+        
+        
     }
 }

@@ -27,12 +27,9 @@ public class JSONHandler {
     Gson gson;
     File json;
     
-    public JSONHandler(String filePath){
+    public JSONHandler(){
         
         gson = new Gson();
-        json = new File(filePath);
-        
-        map = gson.fromJson(readJsonFile(json), new TypeToken<Map<String, Object>>(){}.getType());
     }
     
     private String readJsonFile(File file){
@@ -50,7 +47,10 @@ public class JSONHandler {
         return jsonString.toString();
     }
     
-    public Map<String, Object> getJsonMap(){
+    public Map<String, Object> getJsonMap(String filePath){
+        
+        json = new File(filePath);
+        map = gson.fromJson(readJsonFile(json), new TypeToken<Map<String, Object>>(){}.getType());
         
         return map;
     }

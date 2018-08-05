@@ -38,6 +38,11 @@
                                     <items>
                                       <MenuItem mnemonicParsing="false" onAction="#exitOnButton" text="Close" />
                                           <MenuItem mnemonicParsing="false" onAction="#saveCharacter" text="Save Character" />
+                                          <MenuItem mnemonicParsing="false" onAction="#loadCharacter" text="Load Character">
+                                             <graphic>
+                                                <ChoiceBox fx:id="savedPlayersChoiceBox" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150.0" />
+                                             </graphic>
+                                          </MenuItem>
                                     </items>
                                   </Menu>
                                   <Menu mnemonicParsing="false" text="Edit">
@@ -68,7 +73,7 @@
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label prefWidth="100.0" text="Character Name" />
-                                          <TextField fx:id="characterNameTextField" />
+                                          <TextField fx:id="characterNameTextField" onKeyPressed="#updateCharacterName" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
