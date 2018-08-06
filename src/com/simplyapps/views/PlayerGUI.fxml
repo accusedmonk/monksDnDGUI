@@ -38,11 +38,7 @@
                                     <items>
                                       <MenuItem mnemonicParsing="false" onAction="#exitOnButton" text="Close" />
                                           <MenuItem mnemonicParsing="false" onAction="#saveCharacter" text="Save Character" />
-                                          <MenuItem mnemonicParsing="false" onAction="#loadCharacter" text="Load Character">
-                                             <graphic>
-                                                <ChoiceBox fx:id="savedPlayersChoiceBox" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150.0" />
-                                             </graphic>
-                                          </MenuItem>
+                                          <MenuItem mnemonicParsing="false" onAction="#loadCharacter" text="Load Character" />
                                     </items>
                                   </Menu>
                                   <Menu mnemonicParsing="false" text="Edit">
@@ -67,7 +63,7 @@
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label prefWidth="100.0" text="Player Name" />
-                                          <TextField fx:id="playerNameTextField" />
+                                          <TextField fx:id="playerNameTextField" onKeyPressed="#updatePlayerName" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -158,14 +154,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="strengthModTextField" />
-                                          <Spinner fx:id="strengthSpinner" />
+                                          <TextField fx:id="strengthModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="strengthSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets right="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                  <children>
@@ -176,14 +175,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="dexterityModTextField" />
-                                          <Spinner fx:id="dexteritySpinner" />
+                                          <TextField fx:id="dexterityModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="dexteritySpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                  <children>
@@ -194,14 +196,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="constitutionModTextField" />
-                                          <Spinner fx:id="constitutionSpinner" />
+                                          <TextField fx:id="constitutionModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="constitutionSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets right="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
@@ -212,14 +217,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="intelligenceModTextField" />
-                                          <Spinner fx:id="intelligenceSpinner" />
+                                          <TextField fx:id="intelligenceModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="intelligenceSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                  <children>
@@ -230,14 +238,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="wisdomModTextField" />
-                                          <Spinner fx:id="wisdomSpinner" />
+                                          <TextField fx:id="wisdomModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="wisdomSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets right="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
@@ -248,16 +259,22 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="charismaModTextField" />
-                                          <Spinner fx:id="charismaSpinner" />
+                                          <TextField fx:id="charismaModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="charismaSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </GridPane>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
                            <children>

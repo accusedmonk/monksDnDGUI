@@ -6,7 +6,7 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class PlayerSkills implements Serializable {
     
-    public List<Skill> skills;
+    public ObservableList<Skill> skills;
     
     public PlayerSkills(){
         

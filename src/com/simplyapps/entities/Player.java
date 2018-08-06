@@ -6,8 +6,10 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -17,18 +19,18 @@ import java.util.List;
 
 public class Player implements Serializable {
     
-    public String playerName;
-    public String characterName;
+    public StringProperty playerName;
+    public StringProperty characterName;
     public PlayerClass playerClass;
     public PlayerBackground playerBackground;
     public PlayerRace playerRace;
     public PlayerStats playerStats;
     
-    List<String> personalityTraits;
-    List<String> ideals;
-    List<String> bonds;
-    List<String> flaws;
-    List<String> languages;
+    ObservableList<String> personalityTraits;
+    ObservableList<String> ideals;
+    ObservableList<String> bonds;
+    ObservableList<String> flaws;
+    ObservableList<String> languages;
     
     public Player(){
         
@@ -37,21 +39,19 @@ public class Player implements Serializable {
     
     public void initializeNewPlayer(){
         
-        playerName = "";
-        characterName = "";
+        playerName = new SimpleStringProperty();
+        playerName.setValue("");
+        characterName = new SimpleStringProperty();
+        characterName.setValue("");
         playerClass = new PlayerClass();
         playerBackground = new PlayerBackground();
         playerRace = new PlayerRace();
         playerStats = new PlayerStats();
-        personalityTraits = new ArrayList<String>();
-        ideals = new ArrayList<String>();
-        bonds = new ArrayList<String>();
-        flaws = new ArrayList<String>();
-        languages = new ArrayList<String>();
+        personalityTraits = FXCollections.observableArrayList();
+        ideals = FXCollections.observableArrayList();
+        bonds = FXCollections.observableArrayList();
+        flaws = FXCollections.observableArrayList();
+        languages = FXCollections.observableArrayList();
     }
     
-    public void loadExistingPlayer(){
-        
-        
-    }
 }

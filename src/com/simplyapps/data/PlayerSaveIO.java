@@ -47,7 +47,7 @@ public class PlayerSaveIO {
         Player player = null;
         
         try {
-            FileInputStream fileIn = new FileInputStream(playersDir.getPath()+"\\"+characterName+".ser");
+            FileInputStream fileIn = new FileInputStream(playersDir.getPath()+"\\"+characterName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             player = (Player) in.readObject();
             in.close();
