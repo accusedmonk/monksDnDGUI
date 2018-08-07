@@ -7,6 +7,8 @@ package com.simplyapps.entities;
 
 import java.io.Serializable;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -45,14 +47,43 @@ public class PlayerStats implements Serializable {
     
     public PlayerStats(){
         
-        
+        initializeProperties();
     }
     
     public int calcMod(int value){
         return (value-10)/2;
     }
 
-    
+    private void initializeProperties(){
+        
+        maxHitPoints = new SimpleIntegerProperty();
+        currentHitPoints = new SimpleIntegerProperty();
+        experience = new SimpleIntegerProperty();
+        height = new SimpleIntegerProperty();
+        weight = new SimpleIntegerProperty();
+        lifespan = new SimpleIntegerProperty();
+        speed = new SimpleIntegerProperty();
+        deathSuccesses = new SimpleIntegerProperty();
+        deathFailures = new SimpleIntegerProperty();
+        size = new SimpleStringProperty();
+
+        strength = new SimpleIntegerProperty();
+        dexterity = new SimpleIntegerProperty();
+        constitution = new SimpleIntegerProperty();
+        intelligence = new SimpleIntegerProperty();
+        wisdom = new SimpleIntegerProperty();
+        charisma = new SimpleIntegerProperty();
+
+        strengthMod = new SimpleIntegerProperty();
+        dexterityMod = new SimpleIntegerProperty();
+        constitutionMod = new SimpleIntegerProperty();
+        intelligenceMod = new SimpleIntegerProperty();
+        wisdomMod = new SimpleIntegerProperty();
+        charismaMod = new SimpleIntegerProperty();
+
+        passiveWisdom = new SimpleIntegerProperty();
+        proficiencyBonus = new SimpleIntegerProperty();
+    }
     
     
 }
