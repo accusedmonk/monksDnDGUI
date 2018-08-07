@@ -6,10 +6,10 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 /**
@@ -26,11 +26,11 @@ public class Player implements Serializable {
     public PlayerRace playerRace;
     public PlayerStats playerStats;
     
-    ObservableList<String> personalityTraits;
-    ObservableList<String> ideals;
-    ObservableList<String> bonds;
-    ObservableList<String> flaws;
-    ObservableList<String> languages;
+    List<String> personalityTraits;
+    List<String> ideals;
+    List<String> bonds;
+    List<String> flaws;
+    List<String> languages;
     
     public Player(){
         
@@ -47,11 +47,11 @@ public class Player implements Serializable {
         playerBackground = new PlayerBackground();
         playerRace = new PlayerRace();
         playerStats = new PlayerStats();
-        personalityTraits = FXCollections.observableArrayList();
-        ideals = FXCollections.observableArrayList();
-        bonds = FXCollections.observableArrayList();
-        flaws = FXCollections.observableArrayList();
-        languages = FXCollections.observableArrayList();
+        personalityTraits = new ArrayList();
+        ideals = new ArrayList();
+        bonds = new ArrayList();
+        flaws = new ArrayList();
+        languages = new ArrayList();
     }
     
 }

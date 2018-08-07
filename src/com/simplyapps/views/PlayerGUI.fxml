@@ -285,7 +285,7 @@
                               </Label>
                               <AnchorPane>
                                  <children>
-                                    <ProgressBar fx:id="hitPointsProgressBar" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar fx:id="hitPointsProgressBar" progress="0.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <Label text="Experience Points to Next Level">
@@ -295,7 +295,7 @@
                               </Label>
                               <AnchorPane>
                                  <children>
-                                    <ProgressBar fx:id="experienceProgressBar" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar fx:id="experienceProgressBar" progress="0.83" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>

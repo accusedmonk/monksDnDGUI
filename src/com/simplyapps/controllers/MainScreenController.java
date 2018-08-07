@@ -153,12 +153,12 @@ public class MainScreenController implements Initializable {
         wisdomSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.wisdom.asObject());
         charismaSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.charisma.asObject());
         
-        Bindings.bindBidirectional(strengthModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-        Bindings.bindBidirectional(dexterityModTextField.textProperty(), player.playerStats.dexterityMod, new NumberStringConverter());
-        Bindings.bindBidirectional(constitutionModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-        Bindings.bindBidirectional(intelligenceModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-        Bindings.bindBidirectional(wisdomModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-        Bindings.bindBidirectional(charismaModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
+//        Bindings.bindBidirectional(strengthModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
+//        Bindings.bindBidirectional(dexterityModTextField.textProperty(), player.playerStats.dexterityMod, new NumberStringConverter());
+//        Bindings.bindBidirectional(constitutionModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
+//        Bindings.bindBidirectional(intelligenceModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
+//        Bindings.bindBidirectional(wisdomModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
+//        Bindings.bindBidirectional(charismaModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
         
         hitPointsProgressBar.progressProperty().bindBidirectional(player.playerStats.currentHitPoints);
         experienceProgressBar.progressProperty().bindBidirectional(player.playerStats.experience);

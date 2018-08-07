@@ -48,6 +48,7 @@ public class PlayerStats implements Serializable {
     public PlayerStats(){
         
         initializeProperties();
+        bindMods();
     }
     
     public int calcMod(int value){
@@ -83,6 +84,13 @@ public class PlayerStats implements Serializable {
 
         passiveWisdom = new SimpleIntegerProperty();
         proficiencyBonus = new SimpleIntegerProperty();
+    }
+    
+    private void bindMods(){
+        
+        strength.addListener((observable, oldValue, newValue) -> {
+            strengthMod.setValue(calcMod((int)newValue));
+        });
     }
     
     
