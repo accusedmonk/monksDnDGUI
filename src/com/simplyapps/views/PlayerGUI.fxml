@@ -23,8 +23,8 @@
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1000.0" stylesheets="@../css/styleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simplyapps.controllers.MainScreenController">
-    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <children>
+      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -33,31 +33,27 @@
                         <AnchorPane prefHeight="200.0" prefWidth="395.0">
                            <children>
                               <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <menus>
-                                  <Menu mnemonicParsing="false" text="File">
-                                    <items>
-                                      <MenuItem mnemonicParsing="false" onAction="#exitOnButton" text="Close" />
+                                 <menus>
+                                    <Menu mnemonicParsing="false" text="File">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" onAction="#exitOnButton" text="Close" />
                                           <MenuItem mnemonicParsing="false" onAction="#saveCharacter" text="Save Character" />
-                                          <MenuItem mnemonicParsing="false" onAction="#loadCharacter" text="Load Character">
-                                             <graphic>
-                                                <ChoiceBox fx:id="savedPlayersChoiceBox" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150.0" />
-                                             </graphic>
-                                          </MenuItem>
-                                    </items>
-                                  </Menu>
-                                  <Menu mnemonicParsing="false" text="Edit">
-                                    <items>
-                                      <MenuItem mnemonicParsing="false" text="Delete" />
-                                    </items>
-                                  </Menu>
-                                  <Menu mnemonicParsing="false" text="Help">
-                                    <items>
-                                      <MenuItem mnemonicParsing="false" text="About" />
-                                    </items>
-                                  </Menu>
-                                </menus>
+                                          <MenuItem mnemonicParsing="false" onAction="#loadCharacter" text="Load Character" />
+                                       </items>
+                                    </Menu>
+                                    <Menu mnemonicParsing="false" text="Edit">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Delete" />
+                                       </items>
+                                    </Menu>
+                                    <Menu mnemonicParsing="false" text="Help">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="About" />
+                                       </items>
+                                    </Menu>
+                                 </menus>
                               </MenuBar>
-                                <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" onAction="#exitOnButton" prefHeight="25.0" prefWidth="50.0" text="Exit" textAlignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" onAction="#exitOnButton" prefHeight="25.0" prefWidth="50.0" text="Exit" textAlignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -67,7 +63,7 @@
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <Label prefWidth="100.0" text="Player Name" />
-                                          <TextField fx:id="playerNameTextField" />
+                                          <TextField fx:id="playerNameTextField" onKeyPressed="#updatePlayerName" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -106,13 +102,13 @@
                                  </padding>
                               </VBox>
                               <ScrollPane fx:id="updatesScrollPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <content>
-                                  <AnchorPane>
+                                 <content>
+                                    <AnchorPane>
                                        <children>
                                           <TextFlow fx:id="textUpdatesTextFlow" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                </content>
+                                 </content>
                               </ScrollPane>
                            </children>
                         </AnchorPane>
@@ -126,28 +122,28 @@
             <AnchorPane prefHeight="749.0" prefWidth="994.0">
                <children>
                   <GridPane prefHeight="672.0" prefWidth="952.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <GridPane gridLinesVisible="true">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
@@ -158,14 +154,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="strengthModTextField" />
-                                          <Spinner fx:id="strengthSpinner" />
+                                          <TextField fx:id="strengthModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="strengthSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets right="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                  <children>
@@ -176,14 +175,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="dexterityModTextField" />
-                                          <Spinner fx:id="dexteritySpinner" />
+                                          <TextField fx:id="dexterityModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="dexteritySpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                  <children>
@@ -194,14 +196,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="constitutionModTextField" />
-                                          <Spinner fx:id="constitutionSpinner" />
+                                          <TextField fx:id="constitutionModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="constitutionSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets right="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
@@ -212,14 +217,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="intelligenceModTextField" />
-                                          <Spinner fx:id="intelligenceSpinner" />
+                                          <TextField fx:id="intelligenceModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="intelligenceSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                  <children>
@@ -230,14 +238,17 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="wisdomModTextField" />
-                                          <Spinner fx:id="wisdomSpinner" />
+                                          <TextField fx:id="wisdomModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="wisdomSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets right="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
@@ -248,16 +259,22 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="charismaModTextField" />
-                                          <Spinner fx:id="charismaSpinner" />
+                                          <TextField fx:id="charismaModTextField" alignment="CENTER" />
+                                          <Spinner fx:id="charismaSpinner" editable="true" />
                                        </children>
                                        <padding>
                                           <Insets left="2.0" />
                                        </padding>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
                               </VBox>
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </GridPane>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
                            <children>
@@ -286,11 +303,11 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
                               <TreeTableView fx:id="skillsTreeTableView" editable="true" layoutX="42.0" layoutY="-4.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                  <TreeTableColumn prefWidth="75.0" resizable="false" text="Enabled" />
-                                  <TreeTableColumn prefWidth="75.0" resizable="false" text="Proficiency" />
+                                 <columns>
+                                    <TreeTableColumn prefWidth="75.0" resizable="false" text="Enabled" />
+                                    <TreeTableColumn prefWidth="75.0" resizable="false" text="Proficiency" />
                                     <TreeTableColumn prefWidth="176.0" resizable="false" text="Skill" />
-                                </columns>
+                                 </columns>
                               </TreeTableView>
                            </children>
                         </AnchorPane>
@@ -303,5 +320,5 @@
             </AnchorPane>
          </children>
       </VBox>
-    </children>
+   </children>
 </AnchorPane>

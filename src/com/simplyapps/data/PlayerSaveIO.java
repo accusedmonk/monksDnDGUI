@@ -67,6 +67,8 @@ public class PlayerSaveIO {
         
         if (playerFiles != null && playerFiles.length > 0)
             Arrays.stream(playerFiles).forEach(playerFile -> playerNames.add(playerFile.getName()));
+        else
+            playerNames.add("");
         
         return playerNames; 
     }
