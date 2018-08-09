@@ -62,6 +62,8 @@ public class MainScreenController implements Initializable {
         mapControls();
         startSpinnerListeners();
         loadCharacterOptions();
+        startChoiceBoxListeners();
+        
     }    
     
     
@@ -75,7 +77,10 @@ public class MainScreenController implements Initializable {
     @FXML
     private void saveCharacter(){
         
-        PlayerSaveIO.save(player);
+        if (PlayerSaveIO.save(player))
+            alertPlayer("Character has been saved successfully.");
+        else
+            alertPlayer("Character was not saved.");
     }
     
     @FXML
@@ -94,6 +99,7 @@ public class MainScreenController implements Initializable {
         if (playerName != null && playerName.length() > 0){
             
             player = PlayerSaveIO.load(playerName);
+            setControlsOnPlayerLoad();
             alertPlayer("Character "+player.characterName+" has been loaded successfully.");
             
         } else {
@@ -105,12 +111,20 @@ public class MainScreenController implements Initializable {
     private void updateCharacterName(){
         
         player.characterName = characterNameTextField.getText();
+        updatePlayer("Character name changed to : "+player.characterName);
     }
     
     @FXML
     private void updatePlayerName(){
         
         player.playerName = playerNameTextField.getText();
+        updatePlayer("Player name changed to : "+player.playerName);
+    }
+    
+    @FXML
+    private void updatePlayerClass(){
+        
+        player.playerClass.setClassName(classChoiceBox.getValue());
     }
     
     private void updatePlayer(String message){
@@ -147,7 +161,17 @@ public class MainScreenController implements Initializable {
                 updatePlayer(entry.getKey()+" changed to : "+(int)newValue);
             });
         });
+    }
+    
+    private void startChoiceBoxListeners(){
         
+        JSONHandler jh = new JSONHandler();
+        ObservableList<Map<String, Object>> ol = FXCollections.observableArrayList(jh.getJsonMap("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json"));
+                
+        classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            
+            player.playerClass.setClassName(newValue);
+        });
     }
     
     private void updatePlayerStats(String stat, int newValue){
@@ -176,6 +200,20 @@ public class MainScreenController implements Initializable {
             player.playerStats.setCharisma(newValue);
             charismaModTextField.setText(String.valueOf(player.playerStats.getCharismaMod()));
         }
+    }
+    
+    private void setControlsOnPlayerLoad(){
+        
+        strengthSpinner.getValueFactory().setValue(player.playerStats.getStrength());
+        dexteritySpinner.getValueFactory().setValue(player.playerStats.getDexterity());
+        constitutionSpinner.getValueFactory().setValue(player.playerStats.getConstitution());
+        intelligenceSpinner.getValueFactory().setValue(player.playerStats.getIntelligence());
+        wisdomSpinner.getValueFactory().setValue(player.playerStats.getWisdom());
+        charismaSpinner.getValueFactory().setValue(player.playerStats.getCharisma());
+        
+        characterNameTextField.setText(player.characterName);
+        playerNameTextField.setText(player.playerName);
+        classChoiceBox.setValue(player.playerClass.getClassName());
     }
     
     private void loadCharacterOptions(){
