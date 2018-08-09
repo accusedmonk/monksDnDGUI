@@ -10,10 +10,10 @@ import com.simplyapps.data.PlayerSaveIO;
 import com.simplyapps.data.UpdateTextBuilder;
 import com.simplyapps.entities.Player;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,9 +26,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextFlow;
-import javafx.util.converter.NumberStringConverter;
 
 /**
  *
@@ -45,28 +43,33 @@ public class MainScreenController implements Initializable {
     @FXML
     private Spinner<Integer> strengthSpinner, dexteritySpinner, constitutionSpinner, intelligenceSpinner, wisdomSpinner, charismaSpinner;
     @FXML
-    private ChoiceBox<String> savedPlayersChoiceBox, classChoiceBox, raceChoiceBox, backgroundChoiceBox, alignmentChoiceBox;
+    private ChoiceBox<String> classChoiceBox, raceChoiceBox, backgroundChoiceBox, alignmentChoiceBox;
     @FXML
     private ProgressBar hitPointsProgressBar, experienceProgressBar;
     @FXML
     private ScrollPane updatesScrollPane;
     
     private Player player;
+    private Map<String, Spinner> spinnerMap;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         player = new Player();
+        spinnerMap = new TreeMap<>();
         
-        startListeners();
-        
+        mapControls();
+        startSpinnerListeners();
         loadCharacterOptions();
+        startChoiceBoxListeners();
+        
     }    
     
     
     @FXML
     private void exitOnButton(ActionEvent event) {
+        
         Platform.exit();
         System.exit(0);
     }
@@ -74,8 +77,10 @@ public class MainScreenController implements Initializable {
     @FXML
     private void saveCharacter(){
         
-        PlayerSaveIO.save(player);
-        alertPlayer("Character "+player.characterName.getValue()+" has been saved successfully.");
+        if (PlayerSaveIO.save(player))
+            alertPlayer("Character has been saved successfully.");
+        else
+            alertPlayer("Character was not saved.");
     }
     
     @FXML
@@ -94,8 +99,8 @@ public class MainScreenController implements Initializable {
         if (playerName != null && playerName.length() > 0){
             
             player = PlayerSaveIO.load(playerName);
-            characterNameTextField.setText(player.characterName.getValue());
-            alertPlayer("Character "+player.characterName.getValue()+" has been loaded successfully.");
+            setControlsOnPlayerLoad();
+            alertPlayer("Character "+player.characterName+" has been loaded successfully.");
             
         } else {
             alertPlayer("Character was not loaded.");
@@ -103,23 +108,23 @@ public class MainScreenController implements Initializable {
     }
     
     @FXML
-    private void updatePlayerName(KeyEvent ke){
+    private void updateCharacterName(){
         
-        if (player != null && ke.getCode() == ke.getCode().ENTER){
-            
-            player.playerName.setValue(playerNameTextField.getText());
-            updatePlayer("Player name changed to : "+player.playerName);
-        }
+        player.characterName = characterNameTextField.getText();
+        updatePlayer("Character name changed to : "+player.characterName);
     }
     
     @FXML
-    private void updateCharacterName(KeyEvent ke){
+    private void updatePlayerName(){
         
-        if (player != null && ke.getCode() == ke.getCode().ENTER){
-            
-            player.characterName.setValue(characterNameTextField.getText());
-            updatePlayer("Character name changed to : "+player.characterName.getValue());
-        }
+        player.playerName = playerNameTextField.getText();
+        updatePlayer("Player name changed to : "+player.playerName);
+    }
+    
+    @FXML
+    private void updatePlayerClass(){
+        
+        player.playerClass.setClassName(classChoiceBox.getValue());
     }
     
     private void updatePlayer(String message){
@@ -134,34 +139,81 @@ public class MainScreenController implements Initializable {
         updatesScrollPane.setVvalue(updatesScrollPane.getVmax());
     }
     
-    private void startListeners(){
+    private void mapControls(){
         
-        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
-        dexteritySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
-        constitutionSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
-        intelligenceSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
-        wisdomSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
-        charismaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
+        spinnerMap.put("Strength", strengthSpinner);
+        spinnerMap.put("Dexterity", dexteritySpinner);
+        spinnerMap.put("Constitution", constitutionSpinner);
+        spinnerMap.put("Intelligence", intelligenceSpinner);
+        spinnerMap.put("Wisdom", wisdomSpinner);
+        spinnerMap.put("Charisma",charismaSpinner);
+    }
+    
+    private void startSpinnerListeners(){
         
-        playerNameTextField.textProperty().bindBidirectional(player.playerName); 
-        characterNameTextField.textProperty().bindBidirectional(player.characterName);
+        spinnerMap.entrySet().forEach(entry -> {
         
-        strengthSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.strength.asObject());
-        dexteritySpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.dexterity.asObject());
-        constitutionSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.constitution.asObject());
-        intelligenceSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.intelligence.asObject());
-        wisdomSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.wisdom.asObject());
-        charismaSpinner.getValueFactory().valueProperty().bindBidirectional(player.playerStats.charisma.asObject());
+            entry.getValue().setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0));
         
-//        Bindings.bindBidirectional(strengthModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-//        Bindings.bindBidirectional(dexterityModTextField.textProperty(), player.playerStats.dexterityMod, new NumberStringConverter());
-//        Bindings.bindBidirectional(constitutionModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-//        Bindings.bindBidirectional(intelligenceModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-//        Bindings.bindBidirectional(wisdomModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
-//        Bindings.bindBidirectional(charismaModTextField.textProperty(), player.playerStats.strengthMod, new NumberStringConverter());
+            entry.getValue().valueProperty().addListener((observable, oldValue, newValue) -> {
+            
+                updatePlayerStats(entry.getKey(), (int)newValue);
+                updatePlayer(entry.getKey()+" changed to : "+(int)newValue);
+            });
+        });
+    }
+    
+    private void startChoiceBoxListeners(){
         
-        hitPointsProgressBar.progressProperty().bindBidirectional(player.playerStats.currentHitPoints);
-        experienceProgressBar.progressProperty().bindBidirectional(player.playerStats.experience);
+        JSONHandler jh = new JSONHandler();
+        ObservableList<Map<String, Object>> ol = FXCollections.observableArrayList(jh.getJsonMap("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json"));
+                
+        classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            
+            player.playerClass.setClassName(newValue);
+        });
+    }
+    
+    private void updatePlayerStats(String stat, int newValue){
+        
+        if (stat.matches("Strength")){
+            player.playerStats.setStrength(newValue);
+            strengthModTextField.setText(String.valueOf(player.playerStats.getStrengthMod()));
+        } 
+        else if (stat.matches("Dexterity")){
+            player.playerStats.setDexterity(newValue);
+            dexterityModTextField.setText(String.valueOf(player.playerStats.getDexterityMod()));
+        }
+        else if (stat.matches("Constitution")){
+            player.playerStats.setConstitution(newValue);
+            constitutionModTextField.setText(String.valueOf(player.playerStats.getConstitutionMod()));
+        }
+        else if (stat.matches("Intelligence")){
+            player.playerStats.setIntelligence(newValue);
+            intelligenceModTextField.setText(String.valueOf(player.playerStats.getIntelligenceMod()));
+        }
+        else if (stat.matches("Wisdom")){
+            player.playerStats.setWisdom(newValue);
+            wisdomModTextField.setText(String.valueOf(player.playerStats.getWisdomMod()));
+        }
+        else if (stat.matches("Charisma")){
+            player.playerStats.setCharisma(newValue);
+            charismaModTextField.setText(String.valueOf(player.playerStats.getCharismaMod()));
+        }
+    }
+    
+    private void setControlsOnPlayerLoad(){
+        
+        strengthSpinner.getValueFactory().setValue(player.playerStats.getStrength());
+        dexteritySpinner.getValueFactory().setValue(player.playerStats.getDexterity());
+        constitutionSpinner.getValueFactory().setValue(player.playerStats.getConstitution());
+        intelligenceSpinner.getValueFactory().setValue(player.playerStats.getIntelligence());
+        wisdomSpinner.getValueFactory().setValue(player.playerStats.getWisdom());
+        charismaSpinner.getValueFactory().setValue(player.playerStats.getCharisma());
+        
+        characterNameTextField.setText(player.characterName);
+        playerNameTextField.setText(player.playerName);
+        classChoiceBox.setValue(player.playerClass.getClassName());
     }
     
     private void loadCharacterOptions(){

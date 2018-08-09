@@ -6,8 +6,9 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -15,10 +16,31 @@ import javafx.collections.ObservableList;
  */
 public class PlayerClass implements Serializable {
     
-    ObservableList<Map<String, String>> features;
+    private String className;
+    List<Map<String, String>> features;
     
     public PlayerClass(){
         
+        features = new ArrayList<>();
     }
+    
+    public void addFeature(Map<String, String> feat){
+        
+        features.add(feat);
+    }
+    
+    public void removeFeature(Map<String, String> feat){
+        
+        features.remove(feat);
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+    
     
 }

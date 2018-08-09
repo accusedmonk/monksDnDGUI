@@ -24,8 +24,10 @@ public class PlayerSaveIO {
 
     private static File playersDir = new File("./players/");
             
-    public static void save(Player player) {
-
+    public static boolean save(Player player) {
+        
+        boolean saved = false;
+        
         try {
             
             if (!playersDir.exists())
@@ -36,10 +38,14 @@ public class PlayerSaveIO {
             out.writeObject(player);
             out.close();
             fileOut.close();
+            
+            saved = true;
 
         } catch (IOException i) {
             i.printStackTrace();
         }
+        
+        return saved;
     }
 
     public static Player load(String characterName) {
@@ -67,6 +73,8 @@ public class PlayerSaveIO {
         
         if (playerFiles != null && playerFiles.length > 0)
             Arrays.stream(playerFiles).forEach(playerFile -> playerNames.add(playerFile.getName()));
+        else
+            playerNames.add("");
         
         return playerNames; 
     }
