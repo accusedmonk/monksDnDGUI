@@ -33,7 +33,7 @@ public class PlayerSaveIO {
             if (!playersDir.exists())
                 playersDir.mkdir();
             
-            FileOutputStream fileOut = new FileOutputStream(playersDir.getPath()+"\\"+player.characterName+".ser");
+            FileOutputStream fileOut = new FileOutputStream(playersDir.getPath()+"\\"+player.characterName.getValue()+".ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(player);
             out.close();
