@@ -26,6 +26,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -131,6 +132,13 @@ public class MainScreenController implements Initializable {
     private void updatePlayerClass(){
         
         player.playerClass.setClassName(classChoiceBox.getValue());
+    }
+    
+    @FXML
+    private void setSkillEnabled(CellEditEvent edit){
+        
+        edit.getTableColumn().setEditable(true);
+        ((Skill)edit.getRowValue()).setEnabled(((Skill)edit.getNewValue()).isEnabled());
     }
     
     private void updatePlayer(String message){
@@ -244,6 +252,6 @@ public class MainScreenController implements Initializable {
         skillsTableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("skill"));
         
         skillsTableView.setItems(skills);
-        
+        skillsTableView.setEditable(true);
     }
 }

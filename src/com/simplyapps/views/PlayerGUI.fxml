@@ -154,7 +154,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="strengthModTextField" alignment="CENTER" />
+                                          <TextField fx:id="strengthModTextField" alignment="CENTER" editable="false" focusTraversable="false" />
                                           <Spinner fx:id="strengthSpinner" editable="true" />
                                        </children>
                                        <padding>
@@ -175,7 +175,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="dexterityModTextField" alignment="CENTER" />
+                                          <TextField fx:id="dexterityModTextField" alignment="CENTER" editable="false" focusTraversable="false" />
                                           <Spinner fx:id="dexteritySpinner" editable="true" />
                                        </children>
                                        <padding>
@@ -196,7 +196,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="constitutionModTextField" alignment="CENTER" />
+                                          <TextField fx:id="constitutionModTextField" alignment="CENTER" editable="false" focusTraversable="false" />
                                           <Spinner fx:id="constitutionSpinner" editable="true" />
                                        </children>
                                        <padding>
@@ -217,7 +217,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="intelligenceModTextField" alignment="CENTER" />
+                                          <TextField fx:id="intelligenceModTextField" alignment="CENTER" editable="false" focusTraversable="false" />
                                           <Spinner fx:id="intelligenceSpinner" editable="true" />
                                        </children>
                                        <padding>
@@ -238,7 +238,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="wisdomModTextField" alignment="CENTER" />
+                                          <TextField fx:id="wisdomModTextField" alignment="CENTER" editable="false" focusTraversable="false" />
                                           <Spinner fx:id="wisdomSpinner" editable="true" />
                                        </children>
                                        <padding>
@@ -259,7 +259,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                                        <children>
-                                          <TextField fx:id="charismaModTextField" alignment="CENTER" />
+                                          <TextField fx:id="charismaModTextField" alignment="CENTER" editable="false" focusTraversable="false" />
                                           <Spinner fx:id="charismaSpinner" editable="true" />
                                        </children>
                                        <padding>
@@ -285,7 +285,7 @@
                               </Label>
                               <AnchorPane>
                                  <children>
-                                    <ProgressBar fx:id="hitPointsProgressBar" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar fx:id="hitPointsProgressBar" focusTraversable="false" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <Label text="Experience Points to Next Level">
@@ -295,14 +295,14 @@
                               </Label>
                               <AnchorPane>
                                  <children>
-                                    <ProgressBar fx:id="experienceProgressBar" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar fx:id="experienceProgressBar" focusTraversable="false" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </VBox>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <TableView fx:id="skillsTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="skillsTableView" editable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" resizable="false" text="Enabled" />
                                   <TableColumn prefWidth="75.0" resizable="false" text="Proficiency" />
