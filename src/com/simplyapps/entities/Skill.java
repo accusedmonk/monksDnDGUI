@@ -13,9 +13,9 @@ import java.io.Serializable;
  */
 public class Skill implements Serializable {
     
-    private boolean skillActive;
-    private int skillProficiency;
-    private String skillName;
+    private boolean enabled;
+    private int proficiency;
+    private String skill;
     private String affectedBy;
     
     public Skill(){
@@ -24,73 +24,49 @@ public class Skill implements Serializable {
 
     /**
      *
-     * @param skillActive
-     * @param skillProficiency
-     * @param skillName
+     * @param enabled
+     * @param proficiency
+     * @param name
      * @param affectedBy
      */
-    public Skill(boolean skillActive, int skillProficiency, String skillName, String affectedBy) {
-        this.skillActive = skillActive;
-        this.skillProficiency = skillProficiency;
-        this.skillName = skillName;
+    public Skill(boolean enabled, int proficiency, String name, String affectedBy) {
+        this.enabled = enabled;
+        this.proficiency = proficiency;
+        this.skill = name;
         this.affectedBy = affectedBy;
     }
-    
-    /**
-     * @return the skillActive
-     */
-    public boolean isSkillActive() {
-        return skillActive;
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    /**
-     * @param skillActive the skillActive to set
-     */
-    public void setSkillActive(boolean skillActive) {
-        this.skillActive = skillActive;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    /**
-     * @return the skillProficiency
-     */
-    public int getSkillProficiency() {
-        return skillProficiency;
+    public int getProficiency() {
+        return proficiency;
     }
 
-    /**
-     * @param skillProficiency the skillProficiency to set
-     */
-    public void setSkillProficiency(int skillProficiency) {
-        this.skillProficiency = skillProficiency;
+    public void setProficiency(int proficiency) {
+        this.proficiency = proficiency;
     }
 
-    /**
-     * @return the skillName
-     */
-    public String getSkillName() {
-        return skillName;
+    public String getSkill() {
+        return skill;
     }
 
-    /**
-     * @param skillName the skillName to set
-     */
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public void setSkill(String skill) {
+        this.skill = skill;
     }
-    
-    /**
-     *
-     * @return
-     */
+
     public String getAffectedBy() {
         return affectedBy;
     }
 
-    /**
-     *
-     * @param affectedBy
-     */
     public void setAffectedBy(String affectedBy) {
         this.affectedBy = affectedBy;
     }
+    
+    
 }

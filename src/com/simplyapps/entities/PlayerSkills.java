@@ -6,6 +6,7 @@
 package com.simplyapps.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class PlayerSkills implements Serializable {
     
     public PlayerSkills(){
         
+        skills = new ArrayList<>();
         initializeSkills();
     }
     
@@ -41,5 +43,18 @@ public class PlayerSkills implements Serializable {
         skills.add(new Skill(false, 0, "Sleight of Hand",   "Dexterity"));
         skills.add(new Skill(false, 0, "Stealth",           "Dexterity"));
         skills.add(new Skill(false, 0, "Survival",          "Wisdom"));
+    }
+    
+    public Skill getSkillByName(String name){
+        
+        return skills.stream().findFirst().filter(skill -> skill.getSkill().matches(name)).get();
+    }
+    
+    public void updateSkillProficiency(String modType, int newValue){
+        
+        skills.stream().forEach(skill -> {
+            if (skill.getAffectedBy().matches(modType))
+                skill.setProficiency(newValue);
+        });
     }
 }

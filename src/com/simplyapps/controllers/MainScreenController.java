@@ -9,6 +9,7 @@ import com.simplyapps.data.JSONHandler;
 import com.simplyapps.data.PlayerSaveIO;
 import com.simplyapps.data.UpdateTextBuilder;
 import com.simplyapps.entities.Player;
+import com.simplyapps.entities.Skill;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -25,7 +26,9 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.TextFlow;
 
 /**
@@ -48,6 +51,8 @@ public class MainScreenController implements Initializable {
     private ProgressBar hitPointsProgressBar, experienceProgressBar;
     @FXML
     private ScrollPane updatesScrollPane;
+    @FXML
+    private TableView<Skill> skillsTableView;
     
     private Player player;
     private Map<String, Spinner> spinnerMap;
@@ -63,6 +68,7 @@ public class MainScreenController implements Initializable {
         startSpinnerListeners();
         loadCharacterOptions();
         startChoiceBoxListeners();
+        loadSkillsToTreeTable();
         
     }    
     
@@ -179,26 +185,32 @@ public class MainScreenController implements Initializable {
         if (stat.matches("Strength")){
             player.playerStats.setStrength(newValue);
             strengthModTextField.setText(String.valueOf(player.playerStats.getStrengthMod()));
+            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getStrengthMod());
         } 
         else if (stat.matches("Dexterity")){
             player.playerStats.setDexterity(newValue);
             dexterityModTextField.setText(String.valueOf(player.playerStats.getDexterityMod()));
+            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getDexterityMod());
         }
         else if (stat.matches("Constitution")){
             player.playerStats.setConstitution(newValue);
             constitutionModTextField.setText(String.valueOf(player.playerStats.getConstitutionMod()));
+            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getConstitutionMod());
         }
         else if (stat.matches("Intelligence")){
             player.playerStats.setIntelligence(newValue);
             intelligenceModTextField.setText(String.valueOf(player.playerStats.getIntelligenceMod()));
+            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getIntelligenceMod());
         }
         else if (stat.matches("Wisdom")){
             player.playerStats.setWisdom(newValue);
             wisdomModTextField.setText(String.valueOf(player.playerStats.getWisdomMod()));
+            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getWisdomMod());
         }
         else if (stat.matches("Charisma")){
             player.playerStats.setCharisma(newValue);
             charismaModTextField.setText(String.valueOf(player.playerStats.getCharismaMod()));
+            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getCharismaMod());
         }
     }
     
@@ -221,5 +233,17 @@ public class MainScreenController implements Initializable {
         JSONHandler jh = new JSONHandler();
         ObservableList<String> ol = FXCollections.observableArrayList(jh.getJsonMap("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json").keySet());
         classChoiceBox.setItems(ol);
+    }
+    
+    private void loadSkillsToTreeTable(){
+        
+        ObservableList<Skill> skills = FXCollections.observableArrayList(player.playerSkills.skills);
+        
+        skillsTableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("enabled"));
+        skillsTableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("proficiency"));
+        skillsTableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("skill"));
+        
+        skillsTableView.setItems(skills);
+        
     }
 }

@@ -23,6 +23,7 @@ public class Player implements Serializable {
     public PlayerBackground playerBackground;
     public PlayerRace playerRace;
     public PlayerStats playerStats;
+    public PlayerSkills playerSkills;
     
     List<String> personalityTraits;
     List<String> ideals;
@@ -43,6 +44,8 @@ public class Player implements Serializable {
         playerBackground = new PlayerBackground();
         playerRace = new PlayerRace();
         playerStats = new PlayerStats();
+        playerSkills = new PlayerSkills();
+        
         personalityTraits = new ArrayList<String>();
         ideals = new ArrayList<String>();
         bonds = new ArrayList<String>();

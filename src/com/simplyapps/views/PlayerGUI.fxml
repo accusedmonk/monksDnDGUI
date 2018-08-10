@@ -10,9 +10,9 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -302,13 +302,13 @@
                         </VBox>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <TreeTableView fx:id="skillsTreeTableView" editable="true" layoutX="42.0" layoutY="-4.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <columns>
-                                    <TreeTableColumn prefWidth="75.0" resizable="false" text="Enabled" />
-                                    <TreeTableColumn prefWidth="75.0" resizable="false" text="Proficiency" />
-                                    <TreeTableColumn prefWidth="176.0" resizable="false" text="Skill" />
-                                 </columns>
-                              </TreeTableView>
+                              <TableView fx:id="skillsTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" resizable="false" text="Enabled" />
+                                  <TableColumn prefWidth="75.0" resizable="false" text="Proficiency" />
+                                    <TableColumn prefWidth="157.0" resizable="false" text="Skill" />
+                                </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </children>
