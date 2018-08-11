@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,11 +27,15 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextFlow;
+import javafx.util.Callback;
 
 /**
  *
@@ -137,8 +142,9 @@ public class MainScreenController implements Initializable {
     @FXML
     private void setSkillEnabled(CellEditEvent edit){
         
-        edit.getTableColumn().setEditable(true);
-        ((Skill)edit.getRowValue()).setEnabled(((Skill)edit.getNewValue()).isEnabled());
+        ((Skill)edit.getRowValue()).setEnabled(!((Skill)edit.getRowValue()).isEnabled());
+        updatePlayer(((Skill)edit.getRowValue()).getSkill()+" has been updated");
+        edit.getTableView().refresh();
     }
     
     private void updatePlayer(String message){
@@ -234,6 +240,8 @@ public class MainScreenController implements Initializable {
         characterNameTextField.setText(player.characterName);
         playerNameTextField.setText(player.playerName);
         classChoiceBox.setValue(player.playerClass.getClassName());
+        
+        loadSkillsToTreeTable();
     }
     
     private void loadCharacterOptions(){
@@ -247,9 +255,17 @@ public class MainScreenController implements Initializable {
         
         ObservableList<Skill> skills = FXCollections.observableArrayList(player.playerSkills.skills);
         
-        skillsTableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("enabled"));
-        skillsTableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("proficiency"));
-        skillsTableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("skill"));
+        TableColumn<Skill, Boolean> enabledCol = (TableColumn<Skill, Boolean>) skillsTableView.getColumns().get(0);
+        TableColumn<Skill, Integer> profCol = (TableColumn<Skill, Integer>) skillsTableView.getColumns().get(1);
+        TableColumn<Skill, String> skillCol = (TableColumn<Skill, String>) skillsTableView.getColumns().get(2);
+        
+        enabledCol.setCellFactory(column -> new TextFieldTableCell<>());
+        profCol.setCellFactory(column -> new TextFieldTableCell<>());
+        skillCol.setCellFactory(column -> new TextFieldTableCell<>());
+        
+        enabledCol.setCellValueFactory(new PropertyValueFactory<>("enabled"));
+        profCol.setCellValueFactory(new PropertyValueFactory<>("proficiency"));
+        skillCol.setCellValueFactory(new PropertyValueFactory<>("skill"));
         
         skillsTableView.setItems(skills);
         skillsTableView.setEditable(true);

@@ -23,7 +23,7 @@ public class DnDPlayerInterface extends Application {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("com/simplyapps/views/PlayerGUI.fxml"));
         
         Scene scene = new Scene(root);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }

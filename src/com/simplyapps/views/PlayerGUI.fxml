@@ -304,7 +304,7 @@
                            <children>
                               <TableView fx:id="skillsTableView" editable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" resizable="false" text="Enabled" />
+                                  <TableColumn onEditStart="#setSkillEnabled" prefWidth="75.0" resizable="false" text="Enabled" />
                                   <TableColumn prefWidth="75.0" resizable="false" text="Proficiency" />
                                     <TableColumn prefWidth="157.0" resizable="false" text="Skill" />
                                 </columns>
