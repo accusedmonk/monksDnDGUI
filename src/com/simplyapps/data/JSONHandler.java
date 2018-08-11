@@ -18,6 +18,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,12 +34,48 @@ public class JSONHandler {
     Gson gson;
     File json;
     
+    String raceString,
+    	   classString,
+    	   beyondString,
+    	   equipmentString,
+    	   featsString,
+    	   mechanicsString,
+    	   combatString,
+    	   spellcastingString,
+    	   runningString,
+    	   magicString,
+    	   monstersString,
+    	   conditionsString,
+           godsString,
+    	   planesString,
+    	   creaturesString,
+    	   npcsString;
+    
     public JSONHandler(){
         
         gson = new Gson();
+        String dir = "src\\com\\btmorton\\dnd5esrd\\json\\";
+        
+        raceString          = readJsonFile(new File(dir+"01 races.json"));
+        classString         = readJsonFile(new File(dir+"02 classes.json"));
+        beyondString        = readJsonFile(new File(dir+"03 beyond1st.json"));
+        equipmentString     = readJsonFile(new File(dir+"04 equipment.json"));
+        featsString         = readJsonFile(new File(dir+"05 feats.json"));
+        mechanicsString     = readJsonFile(new File(dir+"06 mechanics.json"));
+        combatString        = readJsonFile(new File(dir+"07 combat.json"));
+        spellcastingString  = readJsonFile(new File(dir+"08 spellcasting.json"));
+        runningString       = readJsonFile(new File(dir+"09 running.json"));
+        magicString         = readJsonFile(new File(dir+"10 magic items.json"));
+        monstersString      = readJsonFile(new File(dir+"11 monsters.json"));
+        conditionsString    = readJsonFile(new File(dir+"12 conditions.json"));
+        godsString          = readJsonFile(new File(dir+"13 gods.json"));
+        planesString        = readJsonFile(new File(dir+"14 planes.json"));
+        creaturesString     = readJsonFile(new File(dir+"15 creatures.json"));
+        npcsString          = readJsonFile(new File(dir+"16 npcs.json"));
     }
     
     private String readJsonFile(File file){
+        
         StringBuilder jsonString = new StringBuilder();
         
         try {
@@ -52,31 +90,102 @@ public class JSONHandler {
         return jsonString.toString();
     }
     
-    public Map<String, Object> getJsonMap(String filePath){
+    public Map<String, Object> getJsonMap(String stringToMap){
         
-        json = new File(filePath);
-        map = gson.fromJson(readJsonFile(json), new TypeToken<Map<String, Object>>(){}.getType());
+        map = gson.fromJson(stringToMap, new TypeToken<Map<String, Object>>(){}.getType());
         
         return map;
     }
     
-    public List<String> getJsonClassData(String className, String dataName){
+    public Set<Entry<String, JsonElement>> getJsonEntrySetData(String jsonString, String... string){
         
-        String jsonString = readJsonFile(new File("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json"));
+        JsonElement element = new JsonParser().parse(jsonString);
+        JsonObject  jObject = element.getAsJsonObject();
+        int stringIndex = 0;
         
-        JsonElement jelement = new JsonParser().parse(jsonString);
-        JsonObject  pClass = jelement.getAsJsonObject();
-        pClass = pClass.getAsJsonObject(className);
-        pClass = pClass.getAsJsonObject("Class Features");
-        pClass = pClass.getAsJsonObject("The "+className);
-        pClass = pClass.getAsJsonObject("table");
-        JsonArray jarray = pClass.getAsJsonArray(dataName);
+        for (int i = 0; i < string.length; i++)
+            jObject = jObject.getAsJsonObject(string[stringIndex++]);
         
-        List<String> features = new ArrayList<>();
-        
-        for (int i = 0; i < jarray.size(); i++)
-            features.add(jarray.get(i).getAsString());
-        
-        return features;
+        return jObject.entrySet();
     }
+    
+    public List<String> getJsonArrayData(String jsonString, String... jsonObjectNames){
+        
+        List<String> data = new ArrayList<>();
+        JsonElement jElement = new JsonParser().parse(jsonString);
+        JsonObject  jObject = jElement.getAsJsonObject();
+        int stringIndex = 0;
+        
+        for (int i = 0; i < jsonObjectNames.length-1; i++)
+            jObject = jObject.getAsJsonObject(jsonObjectNames[stringIndex++]);
+        
+        JsonArray jArray = jObject.getAsJsonArray(jsonObjectNames[stringIndex]);
+        
+        for (int i = 0; i < jArray.size(); i++)
+            data.add(jArray.get(i).getAsString());
+        
+        return data;
+    }
+
+    public String getRaceString() {
+        return raceString;
+    }
+
+    public String getClassString() {
+        return classString;
+    }
+
+    public String getBeyondString() {
+        return beyondString;
+    }
+
+    public String getEquipmentString() {
+        return equipmentString;
+    }
+
+    public String getFeatsString() {
+        return featsString;
+    }
+
+    public String getMechanicsString() {
+        return mechanicsString;
+    }
+
+    public String getCombatString() {
+        return combatString;
+    }
+
+    public String getSpellcastingString() {
+        return spellcastingString;
+    }
+
+    public String getRunningString() {
+        return runningString;
+    }
+
+    public String getMagicString() {
+        return magicString;
+    }
+
+    public String getMonstersString() {
+        return monstersString;
+    }
+
+    public String getConditionsString() {
+        return conditionsString;
+    }
+
+    public String getPlanesString() {
+        return planesString;
+    }
+
+    public String getCreaturesString() {
+        return creaturesString;
+    }
+
+    public String getNpcsString() {
+        return npcsString;
+    }
+    
+    
 }

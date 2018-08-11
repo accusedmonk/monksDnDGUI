@@ -5,6 +5,7 @@
  */
 package com.simplyapps.controllers;
 
+import com.simplyapps.data.DndDataExtractor;
 import com.simplyapps.data.JSONHandler;
 import com.simplyapps.data.PlayerSaveIO;
 import com.simplyapps.data.UpdateTextBuilder;
@@ -30,7 +31,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -45,11 +45,12 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextFlow textUpdatesTextFlow;
     @FXML
-    private TextField playerNameTextField, characterNameTextField, 
-                        strengthModTextField, dexterityModTextField, constitutionModTextField,
-                        intelligenceModTextField, wisdomModTextField, charismaModTextField;
+    private TextField playerNameTextField,      characterNameTextField,     strengthModTextField, 
+                      dexterityModTextField,    constitutionModTextField,   intelligenceModTextField,
+                      wisdomModTextField,       charismaModTextField;
     @FXML
-    private Spinner<Integer> strengthSpinner, dexteritySpinner, constitutionSpinner, intelligenceSpinner, wisdomSpinner, charismaSpinner;
+    private Spinner<Integer> strengthSpinner,       dexteritySpinner,   constitutionSpinner, 
+                             intelligenceSpinner,   wisdomSpinner,      charismaSpinner;
     @FXML
     private ChoiceBox<String> classChoiceBox, raceChoiceBox, backgroundChoiceBox, alignmentChoiceBox;
     @FXML
@@ -64,20 +65,20 @@ public class MainScreenController implements Initializable {
     
     private Player player;
     private Map<String, Spinner> spinnerMap;
-    
+    private DndDataExtractor dndData;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         player = new Player();
         spinnerMap = new TreeMap<>();
+        dndData = new DndDataExtractor();
         
         mapControls();
         startSpinnerListeners();
-        loadCharacterClasses();
+        loadCharacterOptions();
         startChoiceBoxListeners();
         loadSkillsToTreeTable();
-        
     }    
     
     
@@ -138,7 +139,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private void updatePlayerClass(){
         
-        player.playerClass.setClassName(classChoiceBox.getValue());
+        player.playerClass.className = classChoiceBox.getValue();
     }
     
     @FXML
@@ -163,12 +164,12 @@ public class MainScreenController implements Initializable {
     
     private void mapControls(){
         
-        spinnerMap.put("Strength", strengthSpinner);
-        spinnerMap.put("Dexterity", dexteritySpinner);
-        spinnerMap.put("Constitution", constitutionSpinner);
-        spinnerMap.put("Intelligence", intelligenceSpinner);
-        spinnerMap.put("Wisdom", wisdomSpinner);
-        spinnerMap.put("Charisma",charismaSpinner);
+        spinnerMap.put("Strength",      strengthSpinner);
+        spinnerMap.put("Dexterity",     dexteritySpinner);
+        spinnerMap.put("Constitution",  constitutionSpinner);
+        spinnerMap.put("Intelligence",  intelligenceSpinner);
+        spinnerMap.put("Wisdom",        wisdomSpinner);
+        spinnerMap.put("Charisma",      charismaSpinner);
     }
     
     private void startSpinnerListeners(){
@@ -187,88 +188,94 @@ public class MainScreenController implements Initializable {
     
     private void startChoiceBoxListeners(){
              
-        classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            
-            player.playerClass.setClassName(newValue);
-        });
+        classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
+            player.playerClass.className = newValue);
+        raceChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
+            player.playerRace.playerRace = newValue);
+        backgroundChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
+            player.playerBackground.playerBackground = newValue);
+        alignmentChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
+            player.playerBackground.alignment = newValue);
     }
     
     private void updatePlayerStats(String stat, int newValue){
         
         if (stat.matches("Strength")){
-            player.playerStats.setStrength(newValue);
-            strengthModTextField.setText(String.valueOf(player.playerStats.getStrengthMod()));
-            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getStrengthMod());
+            player.playerStats.         setStrength(newValue);
+            strengthModTextField.       setText(String.valueOf(player.playerStats.getStrengthMod()));
+            player.playerSkills.        updateSkillProficiency(stat, player.playerStats.getStrengthMod());
         } 
         else if (stat.matches("Dexterity")){
-            player.playerStats.setDexterity(newValue);
-            dexterityModTextField.setText(String.valueOf(player.playerStats.getDexterityMod()));
-            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getDexterityMod());
+            player.playerStats.         setDexterity(newValue);
+            dexterityModTextField.      setText(String.valueOf(player.playerStats.getDexterityMod()));
+            player.playerSkills.        updateSkillProficiency(stat, player.playerStats.getDexterityMod());
         }
         else if (stat.matches("Constitution")){
-            player.playerStats.setConstitution(newValue);
-            constitutionModTextField.setText(String.valueOf(player.playerStats.getConstitutionMod()));
-            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getConstitutionMod());
+            player.playerStats.         setConstitution(newValue);
+            constitutionModTextField.   setText(String.valueOf(player.playerStats.getConstitutionMod()));
+            player.playerSkills.        updateSkillProficiency(stat, player.playerStats.getConstitutionMod());
         }
         else if (stat.matches("Intelligence")){
-            player.playerStats.setIntelligence(newValue);
-            intelligenceModTextField.setText(String.valueOf(player.playerStats.getIntelligenceMod()));
-            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getIntelligenceMod());
+            player.playerStats.         setIntelligence(newValue);
+            intelligenceModTextField.   setText(String.valueOf(player.playerStats.getIntelligenceMod()));
+            player.playerSkills.        updateSkillProficiency(stat, player.playerStats.getIntelligenceMod());
         }
         else if (stat.matches("Wisdom")){
-            player.playerStats.setWisdom(newValue);
-            wisdomModTextField.setText(String.valueOf(player.playerStats.getWisdomMod()));
-            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getWisdomMod());
+            player.playerStats.         setWisdom(newValue);
+            wisdomModTextField.         setText(String.valueOf(player.playerStats.getWisdomMod()));
+            player.playerSkills.        updateSkillProficiency(stat, player.playerStats.getWisdomMod());
         }
         else if (stat.matches("Charisma")){
-            player.playerStats.setCharisma(newValue);
-            charismaModTextField.setText(String.valueOf(player.playerStats.getCharismaMod()));
-            player.playerSkills.updateSkillProficiency(stat, player.playerStats.getCharismaMod());
+            player.playerStats.         setCharisma(newValue);
+            charismaModTextField.       setText(String.valueOf(player.playerStats.getCharismaMod()));
+            player.playerSkills.        updateSkillProficiency(stat, player.playerStats.getCharismaMod());
         }
     }
     
     private void setControlsOnPlayerLoad(){
         
-        strengthSpinner.getValueFactory().setValue(player.playerStats.getStrength());
-        dexteritySpinner.getValueFactory().setValue(player.playerStats.getDexterity());
+        strengthSpinner.    getValueFactory().setValue(player.playerStats.getStrength());
+        dexteritySpinner.   getValueFactory().setValue(player.playerStats.getDexterity());
         constitutionSpinner.getValueFactory().setValue(player.playerStats.getConstitution());
         intelligenceSpinner.getValueFactory().setValue(player.playerStats.getIntelligence());
-        wisdomSpinner.getValueFactory().setValue(player.playerStats.getWisdom());
-        charismaSpinner.getValueFactory().setValue(player.playerStats.getCharisma());
+        wisdomSpinner.      getValueFactory().setValue(player.playerStats.getWisdom());
+        charismaSpinner.    getValueFactory().setValue(player.playerStats.getCharisma());
         
-        characterNameTextField.setText(player.characterName);
-        playerNameTextField.setText(player.playerName);
-        classChoiceBox.setValue(player.playerClass.getClassName());
+        characterNameTextField. setText(player.characterName);
+        playerNameTextField.    setText(player.playerName);
+        classChoiceBox.         setValue(player.playerClass.className);
         
         loadSkillsToTreeTable();
     }
     
-    private void loadCharacterClasses(){
+    private void loadCharacterOptions(){
         
-        JSONHandler jh = new JSONHandler();
-        ObservableList<String> ol = FXCollections.observableArrayList(jh.getJsonMap("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json").keySet());
-        classChoiceBox.setItems(ol);
+        classChoiceBox.     setItems(dndData.getClassList());
+        raceChoiceBox.      setItems(dndData.getRaceList());
+        alignmentChoiceBox. setItems(dndData.getAlignmentList());
+        backgroundChoiceBox.setItems(dndData.getBackgrounds());
+    }
+    
+    private void loadCharacterClass(String className){
         
-        ol = FXCollections.observableArrayList(jh.getJsonClassData("Barbarian", "Features"));
-        
-        featuresListView.getItems().addAll(ol);
+        featuresListView.getItems().addAll(dndData.getClassFeatures(className));
     }
     
     private void loadSkillsToTreeTable(){
         
         ObservableList<Skill> skills = FXCollections.observableArrayList(player.playerSkills.skills);
         
-        TableColumn<Skill, Boolean> enabledCol = (TableColumn<Skill, Boolean>) skillsTableView.getColumns().get(0);
-        TableColumn<Skill, Integer> profCol = (TableColumn<Skill, Integer>) skillsTableView.getColumns().get(1);
-        TableColumn<Skill, String> skillCol = (TableColumn<Skill, String>) skillsTableView.getColumns().get(2);
+        TableColumn<Skill, Boolean> enabledCol  = (TableColumn<Skill, Boolean>) skillsTableView.getColumns().get(0);
+        TableColumn<Skill, Integer> profCol     = (TableColumn<Skill, Integer>) skillsTableView.getColumns().get(1);
+        TableColumn<Skill, String>  skillCol    = (TableColumn<Skill, String>)  skillsTableView.getColumns().get(2);
         
-        enabledCol.setCellFactory(column -> new TextFieldTableCell<>());
-        profCol.setCellFactory(column -> new TextFieldTableCell<>());
-        skillCol.setCellFactory(column -> new TextFieldTableCell<>());
+        enabledCol. setCellFactory(column -> new TextFieldTableCell<>());
+        profCol.    setCellFactory(column -> new TextFieldTableCell<>());
+        skillCol.   setCellFactory(column -> new TextFieldTableCell<>());
         
-        enabledCol.setCellValueFactory(new PropertyValueFactory<>("enabled"));
-        profCol.setCellValueFactory(new PropertyValueFactory<>("proficiency"));
-        skillCol.setCellValueFactory(new PropertyValueFactory<>("skill"));
+        enabledCol. setCellValueFactory(new PropertyValueFactory<>("enabled"));
+        profCol.    setCellValueFactory(new PropertyValueFactory<>("proficiency"));
+        skillCol.   setCellValueFactory(new PropertyValueFactory<>("skill"));
         
         skillsTableView.setItems(skills);
         skillsTableView.setEditable(true);

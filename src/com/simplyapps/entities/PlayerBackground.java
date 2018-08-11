@@ -15,9 +15,12 @@ import java.util.Map;
  */
 public class PlayerBackground implements Serializable {
     
-    
+    public String playerBackground;
+    public String alignment;
     
     public PlayerBackground(){
         
+        playerBackground = "";
+        alignment = "";
     }
 }

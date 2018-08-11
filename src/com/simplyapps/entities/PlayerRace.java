@@ -13,8 +13,10 @@ import java.io.Serializable;
  */
 public class PlayerRace implements Serializable {
     
+    public String playerRace;
+    
     public PlayerRace(){
         
-        
+        playerRace = "";
     }
 }
