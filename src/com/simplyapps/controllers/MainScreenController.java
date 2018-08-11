@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
@@ -30,12 +30,11 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextFlow;
-import javafx.util.Callback;
 
 /**
  *
@@ -59,6 +58,9 @@ public class MainScreenController implements Initializable {
     private ScrollPane updatesScrollPane;
     @FXML
     private TableView<Skill> skillsTableView;
+    @FXML
+    private ListView featuresListView;
+    
     
     private Player player;
     private Map<String, Spinner> spinnerMap;
@@ -72,7 +74,7 @@ public class MainScreenController implements Initializable {
         
         mapControls();
         startSpinnerListeners();
-        loadCharacterOptions();
+        loadCharacterClasses();
         startChoiceBoxListeners();
         loadSkillsToTreeTable();
         
@@ -184,10 +186,7 @@ public class MainScreenController implements Initializable {
     }
     
     private void startChoiceBoxListeners(){
-        
-        JSONHandler jh = new JSONHandler();
-        ObservableList<Map<String, Object>> ol = FXCollections.observableArrayList(jh.getJsonMap("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json"));
-                
+             
         classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             
             player.playerClass.setClassName(newValue);
@@ -244,11 +243,15 @@ public class MainScreenController implements Initializable {
         loadSkillsToTreeTable();
     }
     
-    private void loadCharacterOptions(){
+    private void loadCharacterClasses(){
         
         JSONHandler jh = new JSONHandler();
         ObservableList<String> ol = FXCollections.observableArrayList(jh.getJsonMap("src\\com\\btmorton\\dnd5esrd\\json\\02 classes.json").keySet());
         classChoiceBox.setItems(ol);
+        
+        ol = FXCollections.observableArrayList(jh.getJsonClassData("Barbarian", "Features"));
+        
+        featuresListView.getItems().addAll(ol);
     }
     
     private void loadSkillsToTreeTable(){
