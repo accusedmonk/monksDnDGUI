@@ -188,8 +188,10 @@ public class MainScreenController implements Initializable {
     
     private void startChoiceBoxListeners(){
              
-        classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
-            player.playerClass.className = newValue);
+        classChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            player.playerClass.className = newValue;
+            loadCharacterClass(newValue);
+        });
         raceChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
             player.playerRace.playerRace = newValue);
         backgroundChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> 
@@ -246,6 +248,7 @@ public class MainScreenController implements Initializable {
         classChoiceBox.         setValue(player.playerClass.className);
         
         loadSkillsToTreeTable();
+        loadCharacterClass(classChoiceBox.getValue());
     }
     
     private void loadCharacterOptions(){

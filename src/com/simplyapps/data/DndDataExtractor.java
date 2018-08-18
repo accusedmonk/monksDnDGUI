@@ -5,7 +5,6 @@
  */
 package com.simplyapps.data;
 
-import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +48,7 @@ public class DndDataExtractor {
     
     public ObservableList<String> getClassFeatures(String className){
         
-        return FXCollections.observableArrayList(jh.getJsonArrayData(className, "Class Features", "The "+className, "Features"));
+        return FXCollections.observableArrayList(jh.getJsonArrayData(jh.getClassString(), className, "Class Features", "The "+className, "table", "Features"));
     }
     
     public ObservableList<String> getBackgrounds(){
